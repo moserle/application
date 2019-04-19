@@ -41,6 +41,7 @@
   },
   "scripts": {
     "analyze": "source-map-explorer build/static/js/main.*",
+    "build-storybook": "build-storybook -s public",
     "build": "react-scripts build",
     "deploy": "gh-pages -d build",
     "eject": "react-scripts eject",
@@ -48,13 +49,10 @@
     "precommit": "lint-staged",
     "predeploy": "npm run build",
     "start": "react-scripts start",
-    "storybook": "start-storybook",
+    "storybook": "start-storybook -p 9009 -s public",
     "test": "react-scripts test"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^5.0.6",
-    "@storybook/addon-jest": "^5.0.6",
-    "@storybook/react": "^5.0.6",
     "@types/classnames": "^2.2.7",
     "@types/color": "^3.0.0",
     "@types/jest": "^24.0.11",
@@ -80,7 +78,12 @@
     "react-testing-library": "^6.0.4",
     "redux-devtools-extension": "^2.13.7",
     "source-map-explorer": "^1.6.0",
-    "typescript": "^3.4.1"
+    "typescript": "^3.4.1",
+    "@storybook/react": "^5.0.10",
+    "@storybook/addon-actions": "^5.0.10",
+    "@storybook/addon-links": "^5.0.10",
+    "@storybook/addons": "^5.0.10",
+    "babel-loader": "^8.0.5"
   },
   "homepage": "https://application.cyto.ai",
   "lint-staged": {
