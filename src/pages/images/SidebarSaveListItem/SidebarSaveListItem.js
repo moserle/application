@@ -1,21 +1,12 @@
 import * as React from 'react';
-import {
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText
-} from '@material-ui/core';
 import SaveIcon from '@material-ui/icons/Save';
 import json2csv from 'json2csv';
 import fileDownload from 'js-file-download';
-import MenuItem from '@material-ui/core/MenuItem/index';
-import MenuList from '@material-ui/core/MenuList/index';
-import Paper from '@material-ui/core/Paper/index';
-import Popover from '@material-ui/core/Popover/index';
 import { fields } from '../../../constants';
 import { SaveDialog } from '..';
 import { useDialog, useMenu } from '../../../hooks';
 import * as API from '../../../classifier';
+import * as MaterialUI from '@material-ui/core';
 
 const SidebarSaveListItem = props => {
   const { anchorEl, openedMenu, openMenu, closeMenu } = useMenu();
@@ -53,7 +44,7 @@ const SidebarSaveListItem = props => {
     fileDownload(json, fileName);
   };
 
-  const saveAnnotationsAndPredictions = () => {
+  const onSaveAnnotationsAndPredictionsClick = () => {
     closeMenu();
 
     openDialog();
@@ -63,7 +54,7 @@ const SidebarSaveListItem = props => {
     setDefaultDialogText('labels.csv');
   };
 
-  const saveClassifier = () => {
+  const onSaveClassifierClick = () => {
     closeMenu();
 
     openDialog();
@@ -73,7 +64,7 @@ const SidebarSaveListItem = props => {
     setDefaultDialogText('MyProject.cyto');
   };
 
-  const saveWeights = () => {
+  const onSaveWeightsClick = () => {
     closeMenu();
 
     API.exportWeights();
@@ -86,38 +77,38 @@ const SidebarSaveListItem = props => {
 
   return (
     <React.Fragment>
-      <ListItem button onClick={openMenu}>
-        <ListItemIcon>
+      <MaterialUI.ListItem button onClick={openMenu}>
+        <MaterialUI.ListItemIcon>
           <SaveIcon />
-        </ListItemIcon>
+        </MaterialUI.ListItemIcon>
 
-        <ListItemText inset primary="Save" />
-      </ListItem>
+        <MaterialUI.ListItemText inset primary="Save" />
+      </MaterialUI.ListItem>
 
-      <Popover
+      <MaterialUI.Popover
         anchorPosition={anchorPosition}
         anchorReference="anchorPosition"
         onClose={closeMenu}
         open={openedMenu}
       >
-        <Paper>
-          <MenuList dense>
-            <MenuItem onClick={saveClassifier}>
-              <ListItemText primary="Save classifier" />
-            </MenuItem>
+        <MaterialUI.Paper>
+          <MaterialUI.MenuList dense>
+            <MaterialUI.MenuItem onClick={onSaveClassifierClick}>
+              <MaterialUI.ListItemText primary="Save classifier" />
+            </MaterialUI.MenuItem>
 
-            <Divider />
+            <MaterialUI.Divider />
 
-            <MenuItem onClick={saveAnnotationsAndPredictions}>
-              <ListItemText primary="Save annotations and predictions" />
-            </MenuItem>
+            <MaterialUI.MenuItem onClick={onSaveAnnotationsAndPredictionsClick}>
+              <MaterialUI.ListItemText primary="Save annotations and predictions" />
+            </MaterialUI.MenuItem>
 
-            <MenuItem onClick={saveWeights}>
-              <ListItemText primary="Save weights" />
-            </MenuItem>
-          </MenuList>
-        </Paper>
-      </Popover>
+            <MaterialUI.MenuItem onClick={onSaveWeightsClick}>
+              <MaterialUI.ListItemText primary="Save weights" />
+            </MaterialUI.MenuItem>
+          </MaterialUI.MenuList>
+        </MaterialUI.Paper>
+      </MaterialUI.Popover>
 
       <SaveDialog
         open={openedDialog}

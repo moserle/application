@@ -1,11 +1,4 @@
 import * as React from 'react';
-import {
-  IconButton,
-  ListItem,
-  ListItemIcon,
-  ListItemSecondaryAction,
-  ListItemText
-} from '@material-ui/core';
 import LabelIcon from '@material-ui/icons/Label';
 import LabelOutlinedIcon from '@material-ui/icons/LabelOutlined';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
@@ -15,6 +8,7 @@ import styles from './SidebarCategoryListItem.css';
 import { makeStyles } from '@material-ui/styles';
 import { useMenu } from '../../../hooks';
 import { SidebarCategoryListItemMenuList } from '..';
+import * as MaterialUI from '@material-ui/core';
 
 const spec = {
   drop(props, monitor, component) {
@@ -29,12 +23,10 @@ const spec = {
   }
 };
 
-function collect(connect, monitor) {
-  return {
-    connectDropTarget: connect.dropTarget(),
-    isOver: monitor.isOver()
-  };
-}
+const collect = (connect, monitor) => ({
+  connectDropTarget: connect.dropTarget(),
+  isOver: monitor.isOver()
+});
 
 const useStyles = makeStyles(styles);
 
@@ -75,23 +67,25 @@ const SidebarCategoryListItem = props => {
             : null
         }
       >
-        <ListItem
+        <MaterialUI.ListItem
           dense
           style={{ cursor: 'pointer' }}
           classes={{
             root: props.isOver ? classes.isOver : null
           }}
         >
-          <ListItemIcon onClick={onToggleVisibilityClick}>
+          <MaterialUI.ListItemIcon onClick={onToggleVisibilityClick}>
             <VisibleIcon color={category.color} visible={category.visible} />
-          </ListItemIcon>
-          <ListItemText primary={category.description} />
-          <ListItemSecondaryAction>
-            <IconButton onClick={openMenu}>
+          </MaterialUI.ListItemIcon>
+
+          <MaterialUI.ListItemText primary={category.description} />
+
+          <MaterialUI.ListItemSecondaryAction>
+            <MaterialUI.IconButton onClick={openMenu}>
               <MoreHorizIcon />
-            </IconButton>
-          </ListItemSecondaryAction>
-        </ListItem>
+            </MaterialUI.IconButton>
+          </MaterialUI.ListItemSecondaryAction>
+        </MaterialUI.ListItem>
       </StyledCategory>
 
       <SidebarCategoryListItemMenuList

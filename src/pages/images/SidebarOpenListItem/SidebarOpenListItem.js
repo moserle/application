@@ -1,18 +1,9 @@
-import {
-  Divider,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  MenuItem,
-  MenuList,
-  Paper,
-  Popover
-} from '@material-ui/core';
 import * as React from 'react';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import { useDialog, useMenu } from '../../../hooks';
 import { OpenExampleClassifierDialog } from '..';
 import * as API from '../../../classifier';
+import * as MaterialUI from '@material-ui/core';
 
 function openProject(e, props) {
   const reader = new FileReader();
@@ -58,22 +49,22 @@ const SidebarOpenListItem = props => {
 
   return (
     <React.Fragment>
-      <ListItem button onClick={openMenu}>
-        <ListItemIcon>
+      <MaterialUI.ListItem button onClick={openMenu}>
+        <MaterialUI.ListItemIcon>
           <FolderOpenIcon />
-        </ListItemIcon>
+        </MaterialUI.ListItemIcon>
 
-        <ListItemText primary="Open" />
-      </ListItem>
+        <MaterialUI.ListItemText primary="Open" />
+      </MaterialUI.ListItem>
 
-      <Popover
+      <MaterialUI.Popover
         anchorPosition={anchorPosition}
         anchorReference="anchorPosition"
         onClose={closeMenu}
         open={openedMenu}
       >
-        <Paper>
-          <MenuList dense>
+        <MaterialUI.Paper>
+          <MaterialUI.MenuList dense>
             <input
               accept=".cyto"
               id="open-project"
@@ -82,17 +73,18 @@ const SidebarOpenListItem = props => {
               style={{ display: 'none' }}
               type="file"
             />
-            <label htmlFor="open-project">
-              <MenuItem>
-                <ListItemText primary="Open classifier" />
-              </MenuItem>
+
+            <label htmlFor="open-classifier">
+              <MaterialUI.MenuItem>
+                <MaterialUI.ListItemText primary="Open classifier" />
+              </MaterialUI.MenuItem>
             </label>
 
-            <Divider />
+            <MaterialUI.Divider />
 
-            <MenuItem onClick={openExampleClassifier}>
-              <ListItemText primary="Open example classifier" />
-            </MenuItem>
+            <MaterialUI.MenuItem onClick={openExampleClassifier}>
+              <MaterialUI.ListItemText primary="Open example classifier" />
+            </MaterialUI.MenuItem>
 
             <input
               accept="*"
@@ -102,14 +94,15 @@ const SidebarOpenListItem = props => {
               style={{ display: 'none' }}
               type="file"
             />
+
             <label htmlFor="open-weights">
-              <MenuItem>
-                <ListItemText primary="Open weights" />
-              </MenuItem>
+              <MaterialUI.MenuItem>
+                <MaterialUI.ListItemText primary="Open weights" />
+              </MaterialUI.MenuItem>
             </label>
-          </MenuList>
-        </Paper>
-      </Popover>
+          </MaterialUI.MenuList>
+        </MaterialUI.Paper>
+      </MaterialUI.Popover>
 
       <OpenExampleClassifierDialog
         onClose={closeDialog}
