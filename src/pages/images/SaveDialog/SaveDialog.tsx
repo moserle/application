@@ -1,33 +1,27 @@
 import * as React from 'react';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
+import * as MaterialUI from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 
-export const SaveDialog = (props: any) => {
-  function handleCancel(props: any) {
-    props.onClose();
-  }
-
-  function handleDownload(props: any) {
-    props.onClose();
-    props.download();
-  }
-
-  const { open, defaultDialogText, changeDefaultDialogText } = props;
+const SaveDialog = (props: any) => {
+  const {
+    open,
+    onClose,
+    download,
+    defaultDialogText,
+    changeDefaultDialogText
+  } = props;
 
   const { t: translation } = useTranslation();
 
+  const handleDownload = (props: any) => {
+    onClose();
+    download();
+  };
+
   return (
-    <Dialog
-      open={open}
-      onClose={() => handleCancel(props)}
-      aria-labelledby="form-dialog-title"
-    >
-      <DialogContent>
-        <TextField
+    <MaterialUI.Dialog onClose={onClose} open={open}>
+      <MaterialUI.DialogContent>
+        <MaterialUI.TextField
           autoFocus
           margin="dense"
           id="name"
@@ -38,16 +32,21 @@ export const SaveDialog = (props: any) => {
           }}
           value={defaultDialogText}
         />
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={() => handleCancel(props)} color="primary">
+      </MaterialUI.DialogContent>
+
+      <MaterialUI.DialogActions>
+        <MaterialUI.Button onClick={onClose} color="primary">
           {translation('Cancel')}
-        </Button>
-        <Button onClick={() => handleDownload(props)} color="primary">
+        </MaterialUI.Button>
+
+        <MaterialUI.Button
+          onClick={() => handleDownload(props)}
+          color="primary"
+        >
           {translation('Download')}
-        </Button>
-      </DialogActions>
-    </Dialog>
+        </MaterialUI.Button>
+      </MaterialUI.DialogActions>
+    </MaterialUI.Dialog>
   );
 };
 
