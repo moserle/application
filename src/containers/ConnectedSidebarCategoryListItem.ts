@@ -7,6 +7,12 @@ import {
 import { SidebarCategoryListItem } from '../pages/images';
 import { Category } from '../types';
 
+const mapStateToProps = (state: { categories: Category[] }, props: any) => {
+  return {
+    categories: state.categories
+  };
+};
+
 const mapDispatchToProps = (dispatch: any, props: any) => {
   return {
     toggleVisibility: (identifier: string) => {
@@ -23,12 +29,6 @@ const mapDispatchToProps = (dispatch: any, props: any) => {
 
       dispatch(action);
     }
-  };
-};
-
-const mapStateToProps = (state: { categories: Category[] }, props: any) => {
-  return {
-    categories: state.categories
   };
 };
 

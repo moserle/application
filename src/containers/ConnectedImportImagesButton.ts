@@ -11,6 +11,12 @@ type CreateImagePayload = {
   identifier: String;
 };
 
+const mapStateToProps = (state: any, props: any) => {
+  return {
+    images: state.images
+  };
+};
+
 const mapDispatchToProps = (dispatch: any, props: any) => {
   return {
     createImage: (checksum: String, data: String) => {
@@ -25,12 +31,6 @@ const mapDispatchToProps = (dispatch: any, props: any) => {
 
       dispatch(action);
     }
-  };
-};
-
-const mapStateToProps = (state: any, props: any) => {
-  return {
-    images: state.images
   };
 };
 

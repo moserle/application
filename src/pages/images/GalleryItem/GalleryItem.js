@@ -74,6 +74,7 @@ const GalleryItem = props => {
       className={imgSelected ? 'selected' : 'unselected'}
     >
       <ConnectedItemLabel image={item} />
+
       <GalleryImage
         key={'img' + item.identifier}
         openImageViewerDialog={openDialog}
@@ -84,6 +85,7 @@ const GalleryItem = props => {
         height={containerStyle.height}
         width={0.9 * containerStyle.width}
       />
+
       <ImageViewerDialog
         onClose={closeDialog}
         open={openedDialog}

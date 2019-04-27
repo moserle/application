@@ -2,6 +2,12 @@ import { connect } from 'react-redux';
 import { GalleryItem } from '../pages/images';
 import { updateImageCategoryAction } from '../reducers/images';
 
+const mapStateToProps = (state: any, props: any) => {
+  return {
+    images: state.images
+  };
+};
+
 const mapDispatchToProps = (dispatch: any, props: any) => {
   return {
     updateImageCategory: (identifier: string, categoryIdentifier: string) => {
@@ -14,12 +20,6 @@ const mapDispatchToProps = (dispatch: any, props: any) => {
 
       dispatch(action);
     }
-  };
-};
-
-const mapStateToProps = (state: any, props: any) => {
-  return {
-    images: state.images
   };
 };
 
