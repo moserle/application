@@ -3,22 +3,26 @@ import { ImageViewerDialog } from '../../image';
 import Image from '../../../components/Image/Image';
 import { useDialog } from '@piximi/hooks';
 import { ConnectedItemLabel } from '../../../containers';
-import { ImageDragSource } from '@piximi/components';
+import { useDrag, DndProvider } from 'react-dnd';
 
 export const GalleryItem = (props: any) => {
-  // item = image
   const { selectedItems, onmousedown, containerStyle, item } = props;
 
   const { openedDialog, openDialog, closeDialog } = useDialog();
 
   const unselectedChannels = item.visualization.visibleChannels;
 
+  const spec = {
+    item: {
+      selectedItems: selectedItems,
+      type: 'image'
+    }
+  };
+
+  const [, dragSource] = useDrag(spec);
+
   return (
-    <ImageDragSource
-      selectedItems={selectedItems}
-      onmousedown={onmousedown}
-      item={item}
-    >
+    <div ref={dragSource}>
       <ConnectedItemLabel image={item} />
 
       <Image
@@ -40,6 +44,6 @@ export const GalleryItem = (props: any) => {
         imgIdentifier={item.identifier}
         brightness={item.brightness}
       />
-    </ImageDragSource>
+    </div>
   );
 };
